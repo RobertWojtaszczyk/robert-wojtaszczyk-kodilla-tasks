@@ -33,8 +33,8 @@ public class TaskController {
     public void deleteTask(@RequestParam Long taskId) throws TaskNotFoundException {
         Task task = service.getTask(taskId).orElseThrow(TaskNotFoundException::new);
         service.deleteTask(task);
-//        TaskDto taskDto = getTask(taskId);
-//        service.deleteTask(taskMapper.mapToTask(taskDto));
+//        TaskDto taskDto = getTask(taskId);    //?tak też działa, ale czy tak jest ok?
+//        service.deleteTask(taskMapper.mapToTask(taskDto));    //?
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateTask")
