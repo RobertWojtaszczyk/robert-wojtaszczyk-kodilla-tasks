@@ -25,8 +25,15 @@ public class DbService {
         return repository.findById(id);
     }
 
-    public void deleteTask(final Task task) {
+    public void deleteTaskById(final Long id) {
+        repository.delete(id);
+    }
+
+    public void deleteTaskByEntity(final Task task) {
         repository.delete(task);
-//        repository.delete(id);
+    }
+
+    public boolean isValidTaskId(final Long id) {
+        return repository.exists(id);
     }
 }
