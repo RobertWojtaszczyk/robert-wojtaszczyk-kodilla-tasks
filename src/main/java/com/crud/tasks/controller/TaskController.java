@@ -40,8 +40,7 @@ public class TaskController {
     public void deleteTaskById(@RequestParam Long taskId) {
         if (service.isValidTaskId(taskId)) {
             service.deleteTaskById(taskId);
-            // odpowiedź HTTP.OK?
-        } // else ????? // odpowiedź HTTP
+        }
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/updateTask") // consumes = APPLICATION_JSON_VALUE??
