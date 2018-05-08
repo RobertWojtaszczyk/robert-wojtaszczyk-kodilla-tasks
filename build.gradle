@@ -29,8 +29,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.projectlombok:lombok')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-//	compile('org.postgresql:postgresql')  // add for Heroku deployment
-	compile('mysql:mysql-connector-java') // remove for Heroku deployment
+	compile('org.postgresql:postgresql')  // add for Heroku deployment
+//	compile('mysql:mysql-connector-java') // remove for Heroku deployment
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 //    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat") // remove for Heroku deployment // external tomcat
 }

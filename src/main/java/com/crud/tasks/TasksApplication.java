@@ -6,15 +6,15 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-//public class TasksApplication { 	// for Heroku deployment
-public class TasksApplication extends SpringBootServletInitializer {  // remove for Heroku deployment
+public class TasksApplication { 	// for Heroku deployment
+//public class TasksApplication extends SpringBootServletInitializer {  // remove for Heroku deployment
 
 	public static void main(String[] args) {
 		SpringApplication.run(TasksApplication.class, args);
 	}
 
-	@Override	// remove for Heroku deployment configure() method
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-	    return application.sources(TasksApplication.class);
-    }
+//	@Override	// remove for Heroku deployment configure() method
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//	    return application.sources(TasksApplication.class);
+//    }
 }
