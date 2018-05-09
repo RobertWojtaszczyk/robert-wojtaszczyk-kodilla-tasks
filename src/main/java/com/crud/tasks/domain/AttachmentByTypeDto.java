@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AttachmentByType {
+public class AttachmentByTypeDto {
 
     @JsonProperty("trello")
-    private Trello trello;
+    private TrelloDto trello;
 }
