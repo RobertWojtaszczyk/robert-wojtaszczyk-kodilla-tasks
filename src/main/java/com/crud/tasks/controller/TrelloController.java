@@ -22,10 +22,8 @@ public class TrelloController {
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
     public List<TrelloBoardDto> getTrelloBoards() {
         return trelloClient.getTrelloBoards().stream()
-//                .filter(trelloBoardDto -> !Objects.equals(trelloBoardDto.getId(), null) && !Objects.equals(trelloBoardDto.getName(), null))
                 .filter(this::isNotNull)
                 .filter(this::isNotEmpty)
-//                .filter(trelloBoardDto -> trelloBoardDto.getName().toLowerCase().contains("kodilla"))
                 .collect(Collectors.toList());
     }
 
