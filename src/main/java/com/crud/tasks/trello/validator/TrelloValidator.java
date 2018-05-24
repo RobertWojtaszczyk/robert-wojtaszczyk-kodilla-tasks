@@ -24,19 +24,19 @@ public class TrelloValidator {
     public List<TrelloBoard> validateTrelloBoards(final List<TrelloBoard> trelloBoards) {
         LOGGER.info("Starting filtering boards...");
         List<TrelloBoard> filteredBoards = trelloBoards.stream()
-                .filter(this::isNotNull)
-                .filter(this::isNotEmpty)
-                .filter(trelloBoard -> !trelloBoard.getName().equalsIgnoreCase("test"))
+                .filter(this::nameIsNotNull)
+                .filter(this::nameIsNotEmpty)
+                .filter(trelloBoard -> !trelloBoard.getName().toLowerCase().contains("test"))
                 .collect(Collectors.toList());
         LOGGER.info("Boards have been filtered. Current list size: " + filteredBoards.size());
         return filteredBoards;
     }
 
-    private boolean isNotNull(TrelloBoard trelloBoard) {
+    private boolean nameIsNotNull(TrelloBoard trelloBoard) {
         return trelloBoard.getName() != null && trelloBoard.getId() != null;
     }
 
-    private boolean isNotEmpty(TrelloBoard trelloBoard) {
+    private boolean nameIsNotEmpty(TrelloBoard trelloBoard) {
         return !trelloBoard.getName().isEmpty() && !trelloBoard.getId().isEmpty();
     }
 }
