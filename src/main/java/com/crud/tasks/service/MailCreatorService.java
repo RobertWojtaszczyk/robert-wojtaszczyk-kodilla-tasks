@@ -20,4 +20,3 @@ public class MailCreatorService {
         return templateEngine.process(templateName, context);
     }
 }
-

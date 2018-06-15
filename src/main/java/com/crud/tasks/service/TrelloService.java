@@ -51,7 +51,7 @@ public class TrelloService {
                 .context("message", "New card: " + cardName + " has been created on your Trello account")
                 .context("tasks_url", "http://localhost:8888/tasks_frontend/")
                 .context("button", "Visit website")
-                .context("goodbye_message", "Stay tuned,")
+                .context("goodbye_message", "Stay tuned!")
                 .context("admin_config", adminConfig)
                 .context("show_button", true)
                 .context("is_friend", true)

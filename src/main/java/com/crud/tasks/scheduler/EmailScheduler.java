@@ -47,18 +47,13 @@ public class EmailScheduler {
                 .subject(SUBJECT)
                 .templateName("mail/once-a-day-email")
                 .context("message", "Currently in database you got: " + size + (size == 1 ? " task" : " tasks"))
-                .context("tasks_url", "http://localhost:8888/tasks_frontend/")
-                .context("button", "Show tasks")
-                .context("goodbye_message", "Stay tuned,")
-                .context("admin_config", adminConfig)
-                .context("show_button", true)
                 .context("is_friend", true)
+                .context("button", "Visit website")
+                .context("tasks_url", "http://localhost:8888/tasks_frontend/")
+                .context("show_tasks", taskList.size() > 0)
                 .context("tasks", taskList)
+                .context("admin_config", adminConfig)
+                .context("goodbye_message", "Stay tuned!")
                 .build();
     }
 }
-/*              new Mail(
-                adminConfig.getAdminMail(),
-                SUBJECT,
-                "Currently in database you got: " + size + (size == 1 ? " task" : " tasks"),
-                "mail/created-trello-card-mail")*/
