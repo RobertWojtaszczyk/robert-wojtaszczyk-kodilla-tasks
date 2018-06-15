@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Trello Card</title>
+    <title>Tasks daily info</title>
     <style>
 
         @media only screen and (max-width: 620px) {
@@ -108,7 +108,7 @@
                                                         <tbody>
                                                         <tr>
                                                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; border-radius: 5px; text-align: center;">
-                                                                <a th:href="${tasks_url}" th:text="${button}" target="_blank" style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; border-color: #3498db;">BUTTON_NAME</a>
+                                                                <a th:href="${tasks_url}" th:text="${button}" name="show-tasks-button" target="_blank" style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; border-color: #3498db;">BUTTON_NAME</a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -120,8 +120,8 @@
                                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
                                             Application functionality:
                                         </p>
-                                        <ul th:each="function : ${application_functionality}">
-                                            <li th:text="${function}"></li>
+                                        <ul th:each="task : ${tasks}">
+                                            <li th:text="${task.title}"></li>
                                         </ul>
                                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;" th:text="${goodbye_message}">GOODBYE_MESSAGE</p>
                                     </td>
@@ -155,5 +155,12 @@
         <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;"> </td>
     </tr>
 </table>
+<script
+        src="https://code.jquery.com/jquery-1.11.1.min.js"
+        integrity="sha256-VAvG3sHdS5LqTT+5A/aeq/bZGa/Uj04xKxY8KM/w9EE="
+        crossorigin="anonymous"></script>
+<script th:inline="javascript">
+    $('#show-tasks-button').on('submit', toggle());
+</script>
 </body>
 </html>

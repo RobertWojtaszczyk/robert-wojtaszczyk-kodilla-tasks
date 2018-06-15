@@ -2,6 +2,9 @@ package com.crud.tasks.scheduler;
 
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.Mail;
+import com.crud.tasks.domain.Task;
+import com.crud.tasks.domain.TaskDto;
+import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.service.SimpleEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,9 @@ public class EmailScheduler {
     private TaskRepository taskRepository;
 
     @Autowired
+    private TaskMapper taskMapper;
+
+    @Autowired
     private AdminConfig adminConfig;
 
 //    @Scheduled(cron = "0 0 10 * * *")
@@ -33,24 +39,21 @@ public class EmailScheduler {
     }
 
     private Mail prepareMessageData(long size) {
-        List<String> functionality = new ArrayList<>();
-        functionality.add("You can manage your tasks");
-        functionality.add("Provides connection with Trello Account");
-        functionality.add("Application allows sending tasks to Trello");
+        List<TaskDto> taskList = taskMapper.mapToTaskDtoList(taskRepository.findAll());
 
         return new Mail
                 .MailBuilder()
                 .mailTo(adminConfig.getAdminMail())
                 .subject(SUBJECT)
-                .templateName("mail/created-trello-card-mail")
+                .templateName("mail/once-a-day-email")
                 .context("message", "Currently in database you got: " + size + (size == 1 ? " task" : " tasks"))
                 .context("tasks_url", "http://localhost:8888/tasks_frontend/")
-                .context("button", "Visit website")
+                .context("button", "Show tasks")
                 .context("goodbye_message", "Stay tuned,")
                 .context("admin_config", adminConfig)
                 .context("show_button", true)
                 .context("is_friend", true)
-                .context("application_functionality", functionality)
+                .context("tasks", taskList)
                 .build();
     }
 }
