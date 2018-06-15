@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class EmailScheduler {
 
@@ -22,13 +25,37 @@ public class EmailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
-    @Scheduled(cron = "0 0 10 * * *")
-//    @Scheduled(fixedDelay = 10000)
+//    @Scheduled(cron = "0 0 10 * * *")
+    @Scheduled(fixedDelay = 10000)
     public void sendInformationEmail() {
         long size = taskRepository.count();
-        simpleEmailService.send(new Mail(
-                adminConfig.getAdminMail(),
-                SUBJECT,
-                "Currently in database you got: " + size + (size == 1 ? " task" : " tasks")));
+        simpleEmailService.send(prepareMessageData(size));
+    }
+
+    private Mail prepareMessageData(long size) {
+        List<String> functionality = new ArrayList<>();
+        functionality.add("You can manage your tasks");
+        functionality.add("Provides connection with Trello Account");
+        functionality.add("Application allows sending tasks to Trello");
+
+        return new Mail
+                .MailBuilder()
+                .mailTo(adminConfig.getAdminMail())
+                .subject(SUBJECT)
+                .templateName("mail/created-trello-card-mail")
+                .context("message", "Currently in database you got: " + size + (size == 1 ? " task" : " tasks"))
+                .context("tasks_url", "http://localhost:8888/tasks_frontend/")
+                .context("button", "Visit website")
+                .context("goodbye_message", "Stay tuned,")
+                .context("admin_config", adminConfig)
+                .context("show_button", true)
+                .context("is_friend", true)
+                .context("application_functionality", functionality)
+                .build();
     }
 }
+/*              new Mail(
+                adminConfig.getAdminMail(),
+                SUBJECT,
+                "Currently in database you got: " + size + (size == 1 ? " task" : " tasks"),
+                "mail/created-trello-card-mail")*/

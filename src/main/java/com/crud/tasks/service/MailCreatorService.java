@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class MailCreatorService {
 
@@ -17,16 +21,25 @@ public class MailCreatorService {
     @Autowired
     private AdminConfig adminConfig;
 
-    public String buildTrelloCardEmail(String message) {
+    public String buildEmail(String templateName, Map<String, Object> contextData) {
         Context context = new Context();
+        for (Map.Entry entry : contextData.entrySet()) {
+            context.setVariable(entry.getKey().toString(), entry.getValue());
+        }
+        return templateEngine.process(templateName, context);
+    }
+}
+/*      List<String> functionality = new ArrayList<>();
+        functionality.add("You can manage your tasks");
+        functionality.add("Provides connection with Trello Account");
+        functionality.add("Application allows sending tasks to Trello");
+
         context.setVariable("message", message);
         context.setVariable("tasks_url", "http://localhost:8888/tasks_frontend/");
         context.setVariable("button", "Visit website");
-        context.setVariable("admin_name", adminConfig.getAdminName());
         context.setVariable("goodbye_message", "Stay tuned,");
-        context.setVariable("company_name", adminConfig.getCompanyName());
-        context.setVariable("company_email", adminConfig.getCompanyEmail());
-        context.setVariable("company_phone", adminConfig.getCompanyPhone());
-        return templateEngine.process("mail/created-trello-card-mail", context);
-    }
-}
+        context.setVariable("admin_config", adminConfig);
+        context.setVariable("show_button", true);
+        context.setVariable("is_friend", true);
+        context.setVariable("application_functionality", functionality);
+        */
