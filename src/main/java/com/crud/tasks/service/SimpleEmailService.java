@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @Service
 public class SimpleEmailService {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMailMessage.class);
 
     @Autowired

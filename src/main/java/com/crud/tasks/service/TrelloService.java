@@ -42,14 +42,12 @@ public class TrelloService {
         functionality.add("You can manage your tasks");
         functionality.add("Provides connection with Trello Account");
         functionality.add("Application allows sending tasks to Trello");
-
         return new Mail
                 .MailBuilder()
                 .mailTo(adminConfig.getAdminMail())
                 .subject(SUBJECT)
                 .templateName("mail/created-trello-card-mail")
                 .context("message", "New card: " + cardName + " has been created on your Trello account")
-                .context("tasks_url", "http://localhost:8888/tasks_frontend/")
                 .context("button", "Visit website")
                 .context("goodbye_message", "Stay tuned!")
                 .context("admin_config", adminConfig)

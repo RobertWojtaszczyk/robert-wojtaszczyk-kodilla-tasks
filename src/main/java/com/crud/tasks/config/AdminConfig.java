@@ -21,4 +21,7 @@ public class AdminConfig {
 
     @Value("${info.company.phone}")
     private String companyPhone;
+
+    @Value("${info.company.www}")
+    private String tasks_url;
 }

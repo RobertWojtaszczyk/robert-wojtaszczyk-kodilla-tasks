@@ -31,8 +31,8 @@ public class EmailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
-//    @Scheduled(cron = "0 0 10 * * *")
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(cron = "0 0 10 * * *")
+//    @Scheduled(fixedDelay = 10000)
     public void sendInformationEmail() {
         long size = taskRepository.count();
         simpleEmailService.send(prepareMessageData(size));
@@ -40,7 +40,6 @@ public class EmailScheduler {
 
     private Mail prepareMessageData(long size) {
         List<TaskDto> taskList = taskMapper.mapToTaskDtoList(taskRepository.findAll());
-
         return new Mail
                 .MailBuilder()
                 .mailTo(adminConfig.getAdminMail())
@@ -49,7 +48,6 @@ public class EmailScheduler {
                 .context("message", "Currently in database you got: " + size + (size == 1 ? " task" : " tasks"))
                 .context("is_friend", true)
                 .context("button", "Visit website")
-                .context("tasks_url", "http://localhost:8888/tasks_frontend/")
                 .context("show_tasks", taskList.size() > 0)
                 .context("tasks", taskList)
                 .context("admin_config", adminConfig)
