@@ -42,7 +42,7 @@ public class SimpleEmailService {
         };
     }
 
-    private SimpleMailMessage createMailMessage(final Mail mail) {
+    /*private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
@@ -51,5 +51,5 @@ public class SimpleEmailService {
             mailMessage.setCc(mail.getToCc());
         }
         return mailMessage;
-    }
+    }*/
 }
